@@ -186,9 +186,9 @@ extern struct fjson_object* fjson_object_get(struct fjson_object *jso)
 {
 	if (!jso) return jso;
 	const int cnt = ATOMIC_INC_AND_FETCH_int(&jso->_ref_count, &jso->_mut_ref_count);
-    if (cnt > 1) return jso; 	
-
-    return NULL;
+	if (cnt == 1) return NULL; /* this means it was previously zero, so this object will be destroyed */
+	
+	return jso;
 }
 
 int fjson_object_put(struct fjson_object *jso)
