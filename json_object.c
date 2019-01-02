@@ -185,8 +185,10 @@ static void fjson_escape_str(struct printbuf *pb, const char *str)
 extern struct fjson_object* fjson_object_get(struct fjson_object *jso)
 {
 	if (!jso) return jso;
-	ATOMIC_INC_AND_FETCH_int(&jso->_ref_count, &jso->_mut_ref_count);
-	return jso;
+	const int cnt = ATOMIC_INC_AND_FETCH_int(&jso->_ref_count, &jso->_mut_ref_count);
+    if (cnt > 1) return jso; 	
+
+    return NULL;
 }
 
 int fjson_object_put(struct fjson_object *jso)
