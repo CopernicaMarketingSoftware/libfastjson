@@ -87,6 +87,17 @@ array_list_add(struct array_list *arr, void *data)
 	return array_list_put_idx(arr, arr->length, data);
 }
 
+int
+array_list_add_idx(struct array_list *arr, int idx, void *data)
+{
+    if(idx < 0 || idx >= arr->length) return -1;
+	if(array_list_expand_internal(arr, arr->length+1)) return -1;
+    // shift all elements right
+    memmove(arr->array + idx + 1, arr->array + idx, (arr->length-(idx + 1))*sizeof(void*));
+	arr->array[idx] = data;
+	return 0;
+}
+
 /*
  * Deleting the idx-th element in the array_list.
  */

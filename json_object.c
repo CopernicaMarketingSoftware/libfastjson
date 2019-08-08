@@ -111,7 +111,7 @@ char char_needsEscape[256] = {
 	1, 1, 1, 1, 1, 1, 1, 1,
 	1, 1, 1, 1, 1, 1, 1, 1,
 	0, 0, 1, 0, 0, 0, 0, 0, /* ascii codes 32 .. 39 */
-	0, 0, 0, 0, 0, 0, 0, 1,
+	0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0,
@@ -163,8 +163,6 @@ static void fjson_escape_str(struct printbuf *pb, const char *str)
 			case '"': printbuf_memappend_no_nul(pb, "\\\"", 2);
 				break;
 			case '\\': printbuf_memappend_no_nul(pb, "\\\\", 2);
-				break;
-			case '/': printbuf_memappend_no_nul(pb, "\\/", 2);
 				break;
 			default: sprintbuf(pb, "\\u00%c%c",
 				fjson_hex_chars[*str >> 4],
@@ -1007,6 +1005,11 @@ int fjson_object_array_length(struct fjson_object *jso)
 int fjson_object_array_add(struct fjson_object *jso,struct fjson_object *val)
 {
 	return array_list_add(jso->o.c_array, val);
+}
+
+int fjson_object_array_add_idx(struct fjson_object *jso, int idx, struct fjson_object *val)
+{
+	return array_list_add_idx(jso->o.c_array, idx, val);
 }
 
 int fjson_object_array_put_idx(struct fjson_object *jso, int idx,

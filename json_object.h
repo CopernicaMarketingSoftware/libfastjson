@@ -463,6 +463,19 @@ extern struct fjson_object* fjson_object_array_bsearch(
 extern int fjson_object_array_add(struct fjson_object *obj,
 				 struct fjson_object *val);
 
+/** Add an element at a specified location of a fjson_object of type fjson_type_array
+ *
+ * The reference count will *not* be incremented. This is to make adding
+ * fields to objects in code more compact. If you want to retain a reference
+ * to an added object you must wrap the passed object with fjson_object_get
+ *
+ * @param obj the fjson_object instance
+ * @param idx the index to add it at
+ * @param val the fjson_object to be added
+ */
+extern int fjson_object_array_add_idx(struct fjson_object *obj, int idx,
+				 struct fjson_object *val);
+
 /** Insert or replace an element at a specified index in an array (a fjson_object of type fjson_type_array)
  *
  * The reference count will *not* be incremented. This is to make adding
