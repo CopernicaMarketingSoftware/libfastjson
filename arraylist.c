@@ -13,6 +13,7 @@
 #ifdef STDC_HEADERS
 # include <stdlib.h>
 # include <string.h>
+# include <sys/param.h>
 #endif /* STDC_HEADERS */
 
 #if defined(HAVE_STRINGS_H) && !defined(_STRING_H) && !defined(__USE_BSD)
@@ -90,10 +91,11 @@ array_list_add(struct array_list *arr, void *data)
 int
 array_list_add_idx(struct array_list *arr, int idx, void *data)
 {
-    if(idx < 0 || idx >= arr->length) return -1;
-	if(array_list_expand_internal(arr, arr->length+1)) return -1;
-    // shift all elements right
-    memmove(arr->array + idx + 1, arr->array + idx, (arr->length-(idx + 1))*sizeof(void*));
+    if(idx < 0) return -1;
+	if(array_list_expand_internal(arr, MAX(arr->length+1, idx+1))) return -1;
+    // shift all elements right, if needed
+    if(arr->array[idx]) memmove(arr->array + idx + 1, arr->array + idx, (arr->length - idx)*sizeof(void*));
+    arr->length = MAX(arr->length+1, idx+1);
 	arr->array[idx] = data;
 	return 0;
 }
