@@ -18,71 +18,71 @@ extern "C" {
 #endif
 
 enum fjson_tokener_error {
-	fjson_tokener_success,
-	fjson_tokener_continue,
-	fjson_tokener_error_depth,
-	fjson_tokener_error_parse_eof,
-	fjson_tokener_error_parse_unexpected,
-	fjson_tokener_error_parse_null,
-	fjson_tokener_error_parse_boolean,
-	fjson_tokener_error_parse_number,
-	fjson_tokener_error_parse_array,
-	fjson_tokener_error_parse_object_key_name,
-	fjson_tokener_error_parse_object_key_sep,
-	fjson_tokener_error_parse_object_value_sep,
-	fjson_tokener_error_parse_string,
-	fjson_tokener_error_parse_comment,
-	fjson_tokener_error_size
+    fjson_tokener_success,
+    fjson_tokener_continue,
+    fjson_tokener_error_depth,
+    fjson_tokener_error_parse_eof,
+    fjson_tokener_error_parse_unexpected,
+    fjson_tokener_error_parse_null,
+    fjson_tokener_error_parse_boolean,
+    fjson_tokener_error_parse_number,
+    fjson_tokener_error_parse_array,
+    fjson_tokener_error_parse_object_key_name,
+    fjson_tokener_error_parse_object_key_sep,
+    fjson_tokener_error_parse_object_value_sep,
+    fjson_tokener_error_parse_string,
+    fjson_tokener_error_parse_comment,
+    fjson_tokener_error_size
 };
 
 enum fjson_tokener_state {
-	fjson_tokener_state_eatws,
-	fjson_tokener_state_start,
-	fjson_tokener_state_finish,
-	fjson_tokener_state_null,
-	fjson_tokener_state_comment_start,
-	fjson_tokener_state_comment,
-	fjson_tokener_state_comment_eol,
-	fjson_tokener_state_comment_end,
-	fjson_tokener_state_string,
-	fjson_tokener_state_string_escape,
-	fjson_tokener_state_escape_unicode,
-	fjson_tokener_state_boolean,
-	fjson_tokener_state_number,
-	fjson_tokener_state_array,
-	fjson_tokener_state_array_add,
-	fjson_tokener_state_array_sep,
-	fjson_tokener_state_object_field_start,
-	fjson_tokener_state_object_field,
-	fjson_tokener_state_object_field_end,
-	fjson_tokener_state_object_value,
-	fjson_tokener_state_object_value_add,
-	fjson_tokener_state_object_sep,
-	fjson_tokener_state_array_after_sep,
-	fjson_tokener_state_object_field_start_after_sep,
-	fjson_tokener_state_inf
+    fjson_tokener_state_eatws,
+    fjson_tokener_state_start,
+    fjson_tokener_state_finish,
+    fjson_tokener_state_null,
+    fjson_tokener_state_comment_start,
+    fjson_tokener_state_comment,
+    fjson_tokener_state_comment_eol,
+    fjson_tokener_state_comment_end,
+    fjson_tokener_state_string,
+    fjson_tokener_state_string_escape,
+    fjson_tokener_state_escape_unicode,
+    fjson_tokener_state_boolean,
+    fjson_tokener_state_number,
+    fjson_tokener_state_array,
+    fjson_tokener_state_array_add,
+    fjson_tokener_state_array_sep,
+    fjson_tokener_state_object_field_start,
+    fjson_tokener_state_object_field,
+    fjson_tokener_state_object_field_end,
+    fjson_tokener_state_object_value,
+    fjson_tokener_state_object_value_add,
+    fjson_tokener_state_object_sep,
+    fjson_tokener_state_array_after_sep,
+    fjson_tokener_state_object_field_start_after_sep,
+    fjson_tokener_state_inf
 };
 
 struct fjson_tokener_srec
 {
-	enum fjson_tokener_state state, saved_state;
-	struct fjson_object *obj;
-	struct fjson_object *current;
-	char *obj_field_name;
+    enum fjson_tokener_state state, saved_state;
+    struct fjson_object *obj;
+    struct fjson_object *current;
+    char *obj_field_name;
 };
 
 #define FJSON_TOKENER_DEFAULT_DEPTH 32
 
 struct fjson_tokener
 {
-	char *str;
-	struct printbuf *pb;
-	int max_depth, depth, is_double, st_pos, char_offset;
-	enum fjson_tokener_error err;
-	unsigned int ucs_char;
-	char quote_char;
-	struct fjson_tokener_srec *stack;
-	int flags;
+    char *str;
+    struct printbuf *pb;
+    int max_depth, depth, is_double, st_pos, char_offset;
+    enum fjson_tokener_error err;
+    unsigned int ucs_char;
+    char quote_char;
+    struct fjson_tokener_srec *stack;
+    int flags;
 };
 
 /**
@@ -174,19 +174,19 @@ const char *mystring = NULL;
 int stringlen = 0;
 enum fjson_tokener_error jerr;
 do {
-	mystring = ...  // get JSON string, e.g. read from file, etc...
-	stringlen = strlen(mystring);
-	jobj = fjson_tokener_parse_ex(tok, mystring, stringlen);
+    mystring = ...  // get JSON string, e.g. read from file, etc...
+    stringlen = strlen(mystring);
+    jobj = fjson_tokener_parse_ex(tok, mystring, stringlen);
 } while ((jerr = fjson_tokener_get_error(tok)) == fjson_tokener_continue);
 if (jerr != fjson_tokener_success)
 {
-	fprintf(stderr, "Error: %s\n", fjson_tokener_error_desc(jerr));
-	// Handle errors, as appropriate for your application.
+    fprintf(stderr, "Error: %s\n", fjson_tokener_error_desc(jerr));
+    // Handle errors, as appropriate for your application.
 }
 if (tok->char_offset < stringlen) // XXX shouldn't access internal fields
 {
-	// Handle extra characters after parsed object as desired.
-	// e.g. issue an error, parse another object from that point, etc...
+    // Handle extra characters after parsed object as desired.
+    // e.g. issue an error, parse another object from that point, etc...
 }
 // Success, use jobj here.
 
@@ -197,7 +197,7 @@ if (tok->char_offset < stringlen) // XXX shouldn't access internal fields
  * @param len the length of str
  */
 extern struct fjson_object* fjson_tokener_parse_ex(struct fjson_tokener *tok,
-						 const char *str, int len);
+                         const char *str, int len);
 
 #ifndef FJSON_NATIVE_API_ONLY
 #define json_tokener fjson_tokener

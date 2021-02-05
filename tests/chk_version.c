@@ -17,10 +17,10 @@
 
 int main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv)
 {
-	if(strcmp(fjson_version(), VERSION)) {
-		fprintf(stderr, "ERROR: fjson_version reports '%s', VERSION is '%s'.\n",
-			fjson_version(), VERSION);
-		exit(1);
-	}
-	return 0;
+    if(strcmp(fjson_version(), VERSION)) {
+        fprintf(stderr, "ERROR: fjson_version reports '%s', VERSION is '%s'.\n",
+            fjson_version(), VERSION);
+        exit(1);
+    }
+    return 0;
 }

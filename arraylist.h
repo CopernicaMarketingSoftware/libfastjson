@@ -20,10 +20,10 @@ typedef void (array_list_free_fn) (void *data);
 
 struct array_list
 {
-	void **array;
-	int length;
-	int size;
-	array_list_free_fn *free_fn;
+    void **array;
+    int length;
+    int size;
+    array_list_free_fn *free_fn;
 };
 
 extern struct array_list*
@@ -54,8 +54,8 @@ extern void
 array_list_sort(struct array_list *arr, int(*compar)(const void *, const void *));
 
 extern void* array_list_bsearch(const void **key,
-		struct array_list *arr,
-		int (*sort_fn)(const void *, const void *));
+        struct array_list *arr,
+        int (*sort_fn)(const void *, const void *));
 
 
 #ifdef __cplusplus

@@ -19,28 +19,28 @@
 
 int main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv)
 {
-	int i;
-	char pb[64];
-	struct fjson_object **json = calloc(NUM_CREATIONS, sizeof(struct fjson_object *));
+    int i;
+    char pb[64];
+    struct fjson_object **json = calloc(NUM_CREATIONS, sizeof(struct fjson_object *));
 
-	if(json == NULL) {
-		perror("malloc ptr table failed:");
-		exit(1);
-	}
+    if(json == NULL) {
+        perror("malloc ptr table failed:");
+        exit(1);
+    }
 
-	for(i = 0 ; i < NUM_CREATIONS ; ++i) {
-		json[i] = fjson_object_new_object();
+    for(i = 0 ; i < NUM_CREATIONS ; ++i) {
+        json[i] = fjson_object_new_object();
 //fprintf(stderr, "main: json[%d] %p\n", i, json[i]);
-		snprintf(pb, sizeof(pb), "%d", i);
-		fjson_object_object_add(json[i], pb, fjson_object_new_string(pb));
-		
-	}
+        snprintf(pb, sizeof(pb), "%d", i);
+        fjson_object_object_add(json[i], pb, fjson_object_new_string(pb));
+        
+    }
 
-	/* free all objects again */
-	for(i = 0 ; i < NUM_CREATIONS ; ++i) {
-		fjson_object_put(json[i]);
-	}
+    /* free all objects again */
+    for(i = 0 ; i < NUM_CREATIONS ; ++i) {
+        fjson_object_put(json[i]);
+    }
 
-	free(json);
-	return 0;
+    free(json);
+    return 0;
 }

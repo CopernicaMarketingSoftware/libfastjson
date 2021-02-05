@@ -24,17 +24,17 @@
 
 int main(int __attribute__((unused)) argc, char __attribute__((unused)) **argv)
 {
-	fjson_object *my_object;
+    fjson_object *my_object;
 
-	MC_SET_DEBUG(1);
+    MC_SET_DEBUG(1);
 
-	my_object = fjson_object_new_object();
-	fjson_object_object_add_ex(my_object, "a", fjson_object_new_int(1), 0);
+    my_object = fjson_object_new_object();
+    fjson_object_object_add_ex(my_object, "a", fjson_object_new_int(1), 0);
 
-	int found = fjson_object_object_get_ex(my_object, "a", NULL);
-	printf("found=%d\n", found);
+    int found = fjson_object_object_get_ex(my_object, "a", NULL);
+    printf("found=%d\n", found);
 
-	fjson_object_put(my_object);
+    fjson_object_put(my_object);
 
-	return 0;
+    return 0;
 }

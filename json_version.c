@@ -11,5 +11,5 @@
 
 const char *fjson_version(void)
 {
-	return VERSION;
+    return VERSION;
 }

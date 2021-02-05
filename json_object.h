@@ -113,9 +113,9 @@ extern const char *fjson_hex_chars;
 /* CAW: added for ANSI C iteration correctness */
 struct fjson_object_iter
 {
-	char *key;
-	struct fjson_object *val;
-	struct lh_entry *entry;
+    char *key;
+    struct fjson_object *val;
+    struct lh_entry *entry;
 };
 
 /* forward structure definitions */
@@ -136,14 +136,14 @@ typedef size_t (fjson_write_fn)(void *ptr, const char *buffer, size_t size);
 /* supported object types */
 
 typedef enum fjson_type {
-	/* If you change this, be sure to update fjson_type_to_name() too */
-	fjson_type_null,
-	fjson_type_boolean,
-	fjson_type_double,
-	fjson_type_int,
-	fjson_type_object,
-	fjson_type_array,
-	fjson_type_string
+    /* If you change this, be sure to update fjson_type_to_name() too */
+    fjson_type_null,
+    fjson_type_boolean,
+    fjson_type_double,
+    fjson_type_int,
+    fjson_type_object,
+    fjson_type_array,
+    fjson_type_string
 } fjson_type;
 
 /* reference counting functions */
@@ -170,13 +170,13 @@ int fjson_object_put(struct fjson_object *obj);
  * Check if the fjson_object is of a given type
  * @param obj the fjson_object instance
  * @param type one of:
-	fjson_type_null (i.e. obj == NULL),
-	fjson_type_boolean,
-	fjson_type_double,
-	fjson_type_int,
-	fjson_type_object,
-	fjson_type_array,
-	fjson_type_string
+    fjson_type_null (i.e. obj == NULL),
+    fjson_type_boolean,
+    fjson_type_double,
+    fjson_type_int,
+    fjson_type_object,
+    fjson_type_array,
+    fjson_type_string
  */
 extern int fjson_object_is_type(struct fjson_object *obj, enum fjson_type type);
 
@@ -186,13 +186,13 @@ extern int fjson_object_is_type(struct fjson_object *obj, enum fjson_type type);
  *
  * @param obj the fjson_object instance
  * @returns type being one of:
-	fjson_type_null (i.e. obj == NULL),
-	fjson_type_boolean,
-	fjson_type_double,
-	fjson_type_int,
-	fjson_type_object,
-	fjson_type_array,
-	fjson_type_string
+    fjson_type_null (i.e. obj == NULL),
+    fjson_type_boolean,
+    fjson_type_double,
+    fjson_type_int,
+    fjson_type_object,
+    fjson_type_array,
+    fjson_type_string
  */
 extern enum fjson_type fjson_object_get_type(struct fjson_object *obj);
 
@@ -331,7 +331,7 @@ extern int fjson_object_object_length(struct fjson_object* obj);
  * @param val a fjson_object or NULL member to associate with the given field
  */
 extern void fjson_object_object_add(struct fjson_object* obj, const char *key,
-				   struct fjson_object *val);
+                   struct fjson_object *val);
 
 /** Add an object field to a fjson_object of type fjson_type_object
  *
@@ -347,7 +347,7 @@ extern void fjson_object_object_add(struct fjson_object* obj, const char *key,
  *             arithmetic or (OPT1|OPT2)
  */
 extern void fjson_object_object_add_ex(struct fjson_object* obj, const char *key,
-				   struct fjson_object *val, const unsigned opts);
+                   struct fjson_object *val, const unsigned opts);
 
 /** Get the fjson_object associate with a given object field
  *
@@ -367,7 +367,7 @@ extern void fjson_object_object_add_ex(struct fjson_object* obj, const char *key
  * @deprecated Please use fjson_object_object_get_ex
  */
 THIS_FUNCTION_IS_DEPRECATED(extern struct fjson_object* fjson_object_object_get(struct fjson_object* obj,
-						  const char *key));
+                          const char *key));
 
 /** Get the fjson_object associated with a given object field.
  *
@@ -388,8 +388,8 @@ THIS_FUNCTION_IS_DEPRECATED(extern struct fjson_object* fjson_object_object_get(
  * @returns whether or not the key exists
  */
 extern fjson_bool fjson_object_object_get_ex(struct fjson_object* obj,
-	const char *key,
-	struct fjson_object **value);
+    const char *key,
+    struct fjson_object **value);
 
 /** Delete the given fjson_object field
  *
@@ -447,9 +447,9 @@ extern void fjson_object_array_sort(struct fjson_object *jso, int(*sort_fn)(cons
  * @return the wanted fjson_object instance
  */
 extern struct fjson_object* fjson_object_array_bsearch(
-		const struct fjson_object *key,
-		const struct fjson_object *jso,
-		int (*sort_fn)(const void *, const void *));
+        const struct fjson_object *key,
+        const struct fjson_object *jso,
+        int (*sort_fn)(const void *, const void *));
 
 /** Add an element to the end of a fjson_object of type fjson_type_array
  *
@@ -461,7 +461,7 @@ extern struct fjson_object* fjson_object_array_bsearch(
  * @param val the fjson_object to be added
  */
 extern int fjson_object_array_add(struct fjson_object *obj,
-				 struct fjson_object *val);
+                 struct fjson_object *val);
 
 /** Add an element at a specified location of a fjson_object of type fjson_type_array
  *
@@ -474,7 +474,7 @@ extern int fjson_object_array_add(struct fjson_object *obj,
  * @param val the fjson_object to be added
  */
 extern int fjson_object_array_add_idx(struct fjson_object *obj, int idx,
-				 struct fjson_object *val);
+                 struct fjson_object *val);
 
 /** Insert or replace an element at a specified index in an array (a fjson_object of type fjson_type_array)
  *
@@ -492,7 +492,7 @@ extern int fjson_object_array_add_idx(struct fjson_object *obj, int idx,
  * @param val the fjson_object to be added
  */
 extern int fjson_object_array_put_idx(struct fjson_object *obj, int idx,
-					 struct fjson_object *val);
+                     struct fjson_object *val);
 
 /** Get the element at specificed index of the array (a fjson_object of type fjson_type_array)
  * @param obj the fjson_object instance
@@ -500,7 +500,7 @@ extern int fjson_object_array_put_idx(struct fjson_object *obj, int idx,
  * @returns the fjson_object at the specified index (or NULL)
  */
 extern struct fjson_object* fjson_object_array_get_idx(struct fjson_object *obj,
-							 int idx);
+                             int idx);
 
 extern void fjson_object_array_del_idx(struct fjson_object *jso, int idx);
 
